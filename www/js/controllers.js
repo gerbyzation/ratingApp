@@ -52,24 +52,39 @@ angular.module('starter.controllers', ['ngCordova'])
 
 })
 
-.controller('sqlCtrl', function ($scope) {
+.controller('sqlCtrl', function ($scope, $cordovaSQLite) {
+  
+  var db;
 
+  // open and initialize db
   $ionicPlatform.ready(function () {
-    var db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
-    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer pirmary key, ";
+    db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
 
-    function errorCB (err) {
+    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique pirmary key, item_name text, item_URI text, item_loc text, item_criteria text, item_rating integer";
+    $cordovaSQLite.execute(db, query, []).then(function (res ) {
+      console.log("result: ", res);
+    }, function (err) {
       console.error(err);
-    }
-
-    function queryDB(tx) {
-      tx.executeSql(query, [], querySuccess, errorCB);
-    }
-
-    var query = db.transaction(queryDB, )
-
+    });
   });
 
-  $scope.
+  $scope.insert = function (name, URI, loc, criteria, rating) {
+    var query = "INSERT INTO ratings (item_name, item_URI, item_loc, item_criteria, item_rating) VALUES (?, ?, ?, ?, ?);";
+    $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
+      console.log("Result", res);
+    }, function (err) {
+      console.error(err);
+    });
+  };
 
-})
+  $scope.selectAll = function () {
+    var query = "SELECT * FROM ratings;";
+    $cordovaSQLite.execute(db, query, []).then(function (res) {
+      $scope.ratings = res;
+    }, function (err) {
+      console.error(err);
+    });
+  };
+
+  
+});

@@ -48,6 +48,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.sql', {
+    url: '/sql',
+    views: {
+      'tab-websql': {
+        templateUrl: 'templates/tab-websql.html',
+        controller: 'sqlCtrl'
+      }
+    }
+  })
+
   .state('tab.dash', {
     url: '/dash',
     views: {
