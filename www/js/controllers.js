@@ -21,27 +21,34 @@ angular.module('starter.controllers', ['ngCordova'])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Ratings) {
   $scope.settings = {
     enableFriends: true
   };
+  $scope.nukeDB = Ratings.nukeAll;
+
 })
 
 .controller('PictureCtrl', function ($scope, $cordovaCamera) {
   $scope.data = "test";
+  $scope.imgURL = null;
+
+  var options = {
+    destinationType: Camera.DestinationType.NATIVE_URI,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    saveToPhotoAlbum: true
+  };
 
   // according to documentation deviceready eventlistener should be added
   $scope.getPicture = function () {
     console.log('executing getPicture()');
-    var options = {
-      destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.CAMERA,
-    };
 
     $cordovaCamera.getPicture(options).then(function (imageURI) {
-      var image = document.getElementByID('myImage');
-      image.src = imageURI;
+      console.log("succes callback");
+      console.log(imageURI);
+      $scope.imgURL = imageURI;
     }, function (err ) {
+      console.log('error callback');
       console.error(err);
     });
 
@@ -52,14 +59,10 @@ angular.module('starter.controllers', ['ngCordova'])
 
 })
 
-.controller('sqlCtrl', function ($scope, Ratings) {
+.controller('sqlCtrl', function ($scope, $rootScope, Ratings) {
 
-  $scope.data = "Data";
-
-  $scope.ratings = Ratings.selectAll();
-  $scope.insert = Ratings.insert();
+  $scope.selectAll = Ratings.selectAll;
+  $scope.insert = Ratings.insert;
   $scope.nukeAll = Ratings.nukeAll;
   
-
-
 });

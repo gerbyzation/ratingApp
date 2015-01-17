@@ -1,7 +1,8 @@
 angular.module('starter.services', [])
 
-.factory('Ratings', function ($cordovaSQLite) {
+.factory('Ratings', function ($cordovaSQLite, $rootScope) {
   
+  $rootScope.ratings = null;
   var db;
 
   // open (and if necessary initialize db)
@@ -15,16 +16,16 @@ angular.module('starter.services', [])
       console.error(err);
     });
 
-    // $cordovaSQLite.execute(db, 'SELECT * FROM ratings;', []).then(function (res) {
-    //   console.log(res.rows.length);
-    //   var items = [];
-    //   for (var i = 0; i < res.rows.length; i++ ) {
-    //     items.push(res.rows.item(i));
-    //   }
-    //   $scope.ratings =  items;
-    // }, function (err) {
-    //   console.error(err);
-    // });
+    $cordovaSQLite.execute(db, 'SELECT * FROM ratings;', []).then(function (res) {
+      console.log(res.rows.length);
+      var items = [];
+      for (var i = 0; i < res.rows.length; i++ ) {
+        items.push(res.rows.item(i));
+      }
+      $rootScope.ratings =  items;
+    }, function (err) {
+      console.error(err);
+    });
 
   }, false);
 
@@ -38,7 +39,6 @@ angular.module('starter.services', [])
           items.push(res.rows.item(i));
         }
         console.log(res);
-        return items;
       }, function (err) {
         console.error(err);
       });
@@ -47,28 +47,24 @@ angular.module('starter.services', [])
     selectAll: function () {
       var query = "SELECT * FROM ratings;";
       $cordovaSQLite.execute(db, query, []).then(function (res) { 
-        console.log();
+
         var items = [];
         for (var i = 0; i < res.rows.length; i++ ) {
           items.push(res.rows.item(i));
         }
-        return items;
+        $rootScope.ratings = items;
+        console.log($rootScope.ratings);
       }, function (err) {
         console.error(err);
       });
     },
 
     nukeAll: function () {
-      var query = "DELETE FROM ratings WHERE ID;";
+      var query = "DELETE FROM ratings;";
 
       $cordovaSQLite.execute(db, query, []).then(function (res) {
         console.log("Deleted all DB entries");
-        var items = [];
-        for (var i = 0; i < res.rows.length; i++) {
-          items.push(res.rows.item(i));
-        }
-        console.log(items);
-        return items;
+        console.log(res);
       }, function (err) {
         console.error(err);
       });
