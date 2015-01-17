@@ -58,12 +58,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.geo', {
+    url: '/geo',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-geo': {
+        templateUrl: 'templates/tab-geo.html',
+        controller: 'GeoCtrl'
       }
     }
   })
@@ -117,6 +117,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/geo');
 
 });

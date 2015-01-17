@@ -2,19 +2,13 @@
   <ion-content>
 
     <h1>Take a picture</h1>
-    <h2>{{ data }}</h2>
-
-    <button class="button" ng-click="capturePhotoWithData();">Capture Photo With Image Data</button> <br>
-    <button class="button" ng-click="capturePhotoWithFile();">Capture Photo With Image File URI</button> <br>
-    <button class="button" ng-click="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-    <button class="button" ng-click="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;" id="largeImage" src="" />
 
     <button class="button button-full button-positive" ng-click="getPicture()">
       <i class="icon ion-camera"></i>Get a new picture
     </button>
+    
     <p>{{ imgURL }}</p>
     <img ng-src="{{ imgURL }}" width="200" height="200">
+
   </ion-content>
 </ion-view>
