@@ -87,12 +87,10 @@ angular.module('starter.controllers', ['ngCordova'])
 
     var query = "INSERT INTO ratings (item_name, item_URI, item_loc, item_criteria, item_rating) VALUES (?, ?, ?, ?, ?);";
     $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
-      var items = [];
-      for (var i = 0; i < res.rows.length; i++ ) {
-        items.push(res.rows.item(i));
-      }
-      $scope.ratings =  items;
+      
       console.log(res);
+      $scope.selectAll();
+
     }, function (err) {
       console.error(err);
     });
