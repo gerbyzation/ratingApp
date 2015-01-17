@@ -51,8 +51,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('tab.sql', {
     url: '/sql',
     views: {
-      'tab-websql': {
-        templateUrl: 'templates/tab-websql.html',
+      'tab-sql': {
+        templateUrl: 'templates/tab-sql.html',
         controller: 'sqlCtrl'
       }
     }

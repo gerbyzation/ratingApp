@@ -1,5 +1,87 @@
 angular.module('starter.services', [])
 
+.factory('Ratings', function ($cordovaSQLite) {
+  // var db;
+
+  // // open and initialize db
+  // document.addEventListener("deviceready", function () {
+  //   db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
+
+  //   var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, item_name text, item_URI text, item_loc text, item_criteria text, item_rating integer);";
+  //   $cordovaSQLite.execute(db, query, []).then(function (res ) {
+  //     // do nothing
+  //   }, function (err) {
+  //     console.error(err);
+  //   });
+
+  // }, false);
+
+  // return {
+  //   insert: function (name, URI, loc, criteria, rating) {
+
+  //     var query = "INSERT INTO ratings (item_name, item_URI, item_loc, item_criteria, item_rating) VALUES (?, ?, ?, ?, ?);";
+  //     $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
+  //       var items = [];
+  //       for (var i = 0; i < res.rows.length; i++ ) {
+  //         items.push(res.rows.item(i));
+  //       }
+  //       return items;
+  //     }, function (err) {
+  //       console.error(err);
+  //     });
+
+  //   },
+
+  //   selectAll: function () {
+  //     return function () {
+  //       var query = "SELECT * FROM ratings;";
+  //       $cordovaSQLite.execute(db, query, []).then(function (res) { 
+  //         console.log(res);
+  //         var items = [];
+  //         for (var i = 0; i < res.rows.length; i++ ) {
+  //           items.push(res.rows.item(i));
+  //         }
+  //         return items;
+  //       }, function (err) {
+  //         console.error(err);
+  //       });
+  //     };
+  //   },
+
+  //   nukeAll: function () {
+  //     var query = "DELETE FROM ratings WHERE ID=*;";
+
+  //     $cordovaSQLite.execute(db, query, []).then(function (res) {
+  //       console.log("Deleted all DB entries");
+  //       var items = [];
+  //       for (var i = 0; i < res.rows.length; i++) {
+  //         items.push(res.rows.item(i));
+  //       }
+  //       return items;
+  //     }, function (err) {
+  //       console.error(err);
+  //     });
+
+  //   }
+  // })
+
+  // function selectAllEntries () {
+
+  //   var query = "SELECT * FROM ratings;";
+  //   $cordovaSQLite.execute(db, query, []).then(function (res) { 
+  //     var items = [];
+  //     for (var i = 0; i < res.rows.length; i++ ) {
+  //       items.push(res.rows.item(i));
+  //     }
+  //     ratings = items;
+  //   }, function (err) {
+  //     console.error(err);
+  //   });
+
+  // }
+
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
