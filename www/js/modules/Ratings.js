@@ -56,6 +56,14 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
         console.error(err);
       });
     },
+    select: function (id) {
+      
+      var query = "SELECT FROM ratings WHERE ID=?;";
+      $cordovaSQLite.execute(db, query, [id]).then(function (res) {
+        var item = res.rows.item(1);
+        return item;
+      });
+    },
 
     nukeAll: function () {
       var query = "DELETE FROM ratings;";
