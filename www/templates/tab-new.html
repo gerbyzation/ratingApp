@@ -1,6 +1,6 @@
 <ion-view view-title="New">
   <ion-content>
-
+  
     <h1>Add New Rating</h1>
 
     <img ng-src="{{ imgURL }}" width="200" height="200">
@@ -8,6 +8,30 @@
       <i class="icon ion-camera"></i>Get a new picture
     </button>
     <p>{{ imgURL }}</p>
+
+    <div class="list">
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Name</span>
+            <input type="text" placeholder="Naam" ng-model="name">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Location</span>
+            <input type="text" placeholder="50.3740482,-4.126179" ng-model="loc">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Criteria</span>
+            <input type="text" placeholder="stuff" ng-model="criteria">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Rating</span>
+            <input type="number" placeholder="5" ng-model="rating">
+        </label>
+
+        <button class="button button-balanced" ng-click="add(name, imgURL, loc, criteria, rating)">Add Rating</button>
+    </div>
 
   </ion-content>
 </ion-view>

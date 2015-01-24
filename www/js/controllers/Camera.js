@@ -1,4 +1,6 @@
-app.controller('PictureCtrl', function ($scope, $cordovaCamera) {
+app.controller('CameraCtrl', function ($scope, $cordovaCamera, Ratings) {
+
+
   $scope.getPicture = function () {
     var options = {
       quality: 100,
@@ -14,4 +16,6 @@ app.controller('PictureCtrl', function ($scope, $cordovaCamera) {
       console.error(err);
     });
   };
+
+  $scope.add = Ratings.insert;
 });

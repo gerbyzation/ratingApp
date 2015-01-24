@@ -43,7 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'tab-new': {
         templateUrl: 'templates/tab-new.html',
-        controller: 'PictureCtrl'
+        controller: 'CameraCtrl'
       }
     }
   })
@@ -64,6 +64,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
       'tab-geo': {
         templateUrl: 'templates/tab-geo.html',
         controller: 'GeoCtrl'
+      }
+    }
+  })
+
+  .state('tab.list', {
+    url: '/list',
+    views: {
+      'tab-list': {
+        templateUrl: 'templates/tab-list.html',
+        controller: 'ListCtrl'
       }
     }
   })
