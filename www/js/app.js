@@ -48,26 +48,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('tab.sql', {
-    url: '/sql',
-    views: {
-      'tab-sql': {
-        templateUrl: 'templates/tab-sql.html',
-        controller: 'sqlCtrl'
-      }
-    }
-  })
-
-  .state('tab.geo', {
-    url: '/geo',
-    views: {
-      'tab-geo': {
-        templateUrl: 'templates/tab-geo.html',
-        controller: 'GeoCtrl'
-      }
-    }
-  })
-
   .state('tab.list', {
     url: '/list',
     views: {
@@ -77,6 +57,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+      .state('tab.list-detail', {
+        url: '/list/:itemId', 
+        views: {
+          'tab-list': {
+            templateUrl: 'templates/list-detail.html',
+            controller: 'ListDetailCtrl'
+          }
+        }
+      })
 
   .state('tab.chats', {
       url: '/chats',
@@ -127,6 +116,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/geo');
+  $urlRouterProvider.otherwise('/tab/friends');
 
 });
