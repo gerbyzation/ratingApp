@@ -4,40 +4,56 @@ app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
 
 });
 
-app.controller('ListDetailCtrl', function ($scope, $stateParams, $ionicModal, Ratings) {
+app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, Ratings) {
 
-    $scope.select = Ratings.select($stateParams.itemId);
+    $scope.items = $rootScope.items;
+    $scope.item = {};
+    $scope.select = function () {
 
-    // modal stuff
-    $ionicModal.fromTemplateUrl('templates/modal-edit.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function(modal) {
-        console.log('modal created');
-        $scope.modal = modal;
-    });
+        // SQL ID is not zero-based, subtract 1 from ID to get index
+        $scope.item = $scope.ratings[$stateParams.itemId-1];
+        console.log($scope.ratings[$stateParams.itemId-1]);
 
-    $scope.openEdit = function () {
-        console.log($scope);
-        $scope.modal.show();
+    }();
+
+    $scope.edit = false;
+
+    $scope.switchEditMode = function () {
+        $rootScope.ratings[2].name = "John";
+        console.log($scope.ratings[2].name);
+        $scope.edit = !$scope.edit;
     };
 
-    $scope.closeEdit = function () {
-        $scope.modal.hide();
-    };
+    // // modal stuff
+    // $ionicModal.fromTemplateUrl('templates/modal-edit.html', {
+    //     scope: $scope,
+    //     animation: 'slide-in-up'
+    // }).then(function(modal) {
+    //     console.log('modal created');
+    //     $scope.modal = modal;
+    // });
 
-    // clean up the modal once done
-    $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-    });
+    // $scope.openEdit = function () {
+    //     console.log($scope);
+    //     $scope.modal.show();
+    // };
 
-    $scope.$on('modal.hidden', function () {
-        console.log('modal hidden');
-        // execute actoin
-    });
+    // $scope.closeEdit = function () {
+    //     $scope.modal.hide();
+    // };
 
-    $scope.$on('modal.removed', function () {
-        console.log('modal removed');
-        // execute action
-    });
+    // // clean up the modal once done
+    // $scope.$on('$destroy', function () {
+    //     $scope.modal.remove();
+    // });
+
+    // $scope.$on('modal.hidden', function () {
+    //     console.log('modal hidden');
+    //     // execute actoin
+    // });
+
+    // $scope.$on('modal.removed', function () {
+    //     console.log('modal removed');
+    //     // execute action
+    // });
 });

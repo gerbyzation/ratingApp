@@ -1,6 +1,6 @@
-angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $rootScope) {
+angular.module('Ratings', []).service('Ratings', function ($cordovaSQLite, $rootScope) {
   
-  $rootScope.ratings = null;
+  $rootScope.ratings = [];
   var db;
 
   // open (and if necessary initialize db)
@@ -20,15 +20,15 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
       for (var i = 0; i < res.rows.length; i++ ) {
         items.push(res.rows.item(i));
       }
-      $rootScope.ratings =  items;
+      $rootScope.ratings = items;
     }, function (err) {
       console.error(err);
     });
 
   }, false);
 
-  return {
-    insert: function (name, URI, loc, criteria, rating) {
+  // return {
+    this.insert=  function (name, URI, loc, criteria, rating) {
 
       var query = "INSERT INTO ratings (name, URI, loc, criteria, rating) VALUES (?, ?, ?, ?, ?);";
       $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
@@ -40,18 +40,18 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
       }, function (err) {
         console.error(err);
       });
-    },
+    };
 
-    update: function (name, URI, loc, criteria, rating, id) {
+    this.update= function (name, URI, loc, criteria, rating, id) {
       var query = "UPDATE ratings SET name='?', URI='?', loc='?', criteria='?', rating='?' WHERE ID='?'";
       $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating, id]).then( function (res) {
         console.log(res);
       }, function (err) {
         console.error(err);
       });
-    },
+    };
 
-    selectAll: function () {
+    this.selectAll= function () {
       var query = "SELECT * FROM ratings;";
       $cordovaSQLite.execute(db, query, []).then(function (res) { 
 
@@ -61,24 +61,24 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
         }
         $rootScope.ratings = items;
         console.log($rootScope.ratings);
+        return items;
       }, function (err) {
         console.error(err);
       });
-    },
-    select: function (id) {
-      
-      console.log(id);
-      var query = "SELECT * FROM ratings WHERE ID=?;";
-      $cordovaSQLite.execute(db, query, [id]).then(function (res) {
-        var item = res.rows.item(0);
-        $rootScope.item = item;
-        console.log($rootScope.item);
-      }, function (err) {
-        console.error(err);
-      });
-    },
+    };
+    // this.select= function (id) {
 
-    nukeAll: function () {
+    //   console.log(id);
+    //   var query = "SELECT * FROM ratings WHERE ID=?;";
+    //   $cordovaSQLite.execute(db, query, [id]).then(function (res) {
+    //     item = res.rows.item(0);
+    //     return item;
+    //   }, function (err) {
+    //     console.error(err);
+    //   });
+    // };
+
+    this.nukeAll= function () {
       var query = "DELETE FROM ratings;";
 
       $cordovaSQLite.execute(db, query, []).then(function (res) {
@@ -87,9 +87,9 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
       }, function (err) {
         console.error(err);
       });
-    },
+    };
 
-    dropTable: function () {
+    this.dropTable = function () {
       var query = "DROP TABLE ratings;";
 
       $cordovaSQLite.execute(db, query, []).then(function () {
@@ -97,8 +97,8 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
       }, function (err) {
         console.error(err);
       });
-    }
+    };
     
-  };
+  // };
 
 });

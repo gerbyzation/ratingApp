@@ -4,32 +4,32 @@
         <button class="button button-positive button-outline" ng-click="closeEdit(name, URI, loc, criteria, rating, ID)">Done</button>
     </ion-header-bar>
     <ion-content>
-        <img ng-src="{{ URI }}" width="200" height="200">
+        <img ng-src="{{ item.URI }}" width="200" height="200">
         <button class="button button-positive" ng-click="getPicture()">
           <i class="icon ion-camera"></i>Get a new picture
         </button>
-        <p>{{ URI }}</p>
-        <p>ID: {{ id }}</p>
+        <p>{{ item.URI }}</p>
+        <p>ID: {{ item.ID }}</p>
 
         <div class="list">
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="Naam" ng-model="name">
+                <input type="text" placeholder="Naam" ng-model="item.name">
             </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Location</span>
-                <input type="text" placeholder="50.3740482,-4.126179" ng-model="loc">
+                <input type="text" placeholder="50.3740482,-4.126179" ng-model="item.loc">
             </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Criteria</span>
-                <input type="text" placeholder="stuff" ng-model="criteria">
+                <input type="text" placeholder="stuff" ng-model="item.criteria">
             </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Rating</span>
-                <input type="number" placeholder="5" ng-model="rating">
+                <input type="number" placeholder="5" ng-model="item.rating">
             </label>
         </div>
 
