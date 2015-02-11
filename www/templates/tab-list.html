@@ -1,9 +1,9 @@
 <ion-view view-title="List">
   <ion-content>
     <ion-list>
-      <ion-item class="item-avatar" ng-repeat="item in ratings" type="item-text-wrap" href="#/tab/list/detail">
-        <img ng-src="{{item.item_URI}}">
-        <h2>{{item.item_name}}</h2>
+      <ion-item class="item-avatar" ng-repeat="item in ratings" type="item-text-wrap" href="#/tab/list/{{item.ID}}">
+        <img ng-src="{{item.URI}}">
+        <h2>{{ item.name }}</h2>
       </ion-item>
     </ion-list>
   </ion-content>

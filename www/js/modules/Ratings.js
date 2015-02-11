@@ -7,7 +7,7 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
   document.addEventListener("deviceready", function () {
     db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
 
-    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, item_name text, item_URI text, item_loc text, item_criteria text, item_rating integer);";
+    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, name text, URI text, loc text, criteria text, rating integer);";
     $cordovaSQLite.execute(db, query, []).then(function (res) {
       // do nothing
     }, function (err) {
@@ -30,12 +30,21 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
   return {
     insert: function (name, URI, loc, criteria, rating) {
 
-      var query = "INSERT INTO ratings (item_name, item_URI, item_loc, item_criteria, item_rating) VALUES (?, ?, ?, ?, ?);";
+      var query = "INSERT INTO ratings (name, URI, loc, criteria, rating) VALUES (?, ?, ?, ?, ?);";
       $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
         var items = [];
         for (var i = 0; i < res.rows.length; i++ ) {
           items.push(res.rows.item(i));
         }
+        console.log(res);
+      }, function (err) {
+        console.error(err);
+      });
+    },
+
+    update: function (name, URI, loc, criteria, rating, id) {
+      var query = "UPDATE ratings SET name='?', URI='?', loc='?', criteria='?', rating='?' WHERE ID='?'";
+      $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating, id]).then( function (res) {
         console.log(res);
       }, function (err) {
         console.error(err);
@@ -58,10 +67,14 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     },
     select: function (id) {
       
-      var query = "SELECT FROM ratings WHERE ID=?;";
+      console.log(id);
+      var query = "SELECT * FROM ratings WHERE ID=?;";
       $cordovaSQLite.execute(db, query, [id]).then(function (res) {
-        var item = res.rows.item(1);
-        return item;
+        var item = res.rows.item(0);
+        $rootScope.item = item;
+        console.log($rootScope.item);
+      }, function (err) {
+        console.error(err);
       });
     },
 
@@ -75,6 +88,16 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
         console.error(err);
       });
     },
+
+    dropTable: function () {
+      var query = "DROP TABLE ratings;";
+
+      $cordovaSQLite.execute(db, query, []).then(function () {
+        console.log(res);
+      }, function (err) {
+        console.error(err);
+      });
+    }
     
   };
 

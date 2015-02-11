@@ -1,15 +1,10 @@
-<!--
-This template loads for the 'tab.friend-detail' state (app.js)
-'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-The FriendsCtrl pulls data from the Friends service (service.js)
-The Friends service returns an array of friend data
--->
 <ion-view view-title="{{item.name}}">
   <ion-content class="padding">
-    <button class="button button-outline button-positive">Edit</button>
-    <h3>Notes</h3>
-    <p>
-      {{ item.hobby }}
-    </p>
+    <button class="button button-outline button-positive" ng-click="openEdit()">Edit</button>
+    <p>{{ item.name }}</p>
+    <p>{{ item.ID }}</p>
+    <p>{{ item.URI }}</p>
+    <p>{{ item.loc }}</p>
+    <p>{{ item.criteria }}</p>
   </ion-content>
 </ion-view>

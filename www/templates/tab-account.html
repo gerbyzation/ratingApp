@@ -12,11 +12,26 @@
       </ion-item>
 
       <ion-item class="item item-button-right">
+        Add Test Data
+        <button class="button button-outline button-positive" ng-click="addTestData()">
+          <i class="icon ion-stats-bars"></i>
+        </button>
+      </ion-item>
+
+      <ion-item class="item item-button-right">
         Clear Database
-        <button class="button button-assertive" ng-click="nukeDB()">
+        <button class="button button-outline button-assertive" ng-click="nukeDB()">
           <i class="icon ion-trash-a"></i>
         </button>
       </ion-item>
+
+      <ion-item class="item item-button-right">
+        Destroy
+        <button class="button button-outline button-assertive" ng-click="dropTable()">
+          <i class="icon ion-trash-a"></i>
+        </button>
+      </ion-item>
+
     </ion-list>
   </ion-content>
 </ion-view>
