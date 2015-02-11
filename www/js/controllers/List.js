@@ -6,7 +6,7 @@ app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
 
 app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, Ratings) {
 
-    $scope.items = $rootScope.items;
+    $scope.ratings = $rootScope.ratings;
     $scope.item = {};
     $scope.select = function () {
 
@@ -19,41 +19,41 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $io
     $scope.edit = false;
 
     $scope.switchEditMode = function () {
-        $rootScope.ratings[2].name = "John";
-        console.log($scope.ratings[2].name);
+        // $scope.ratings[2].name = "Sjaak";
+        // console.log($scope.ratings[2].name);
         $scope.edit = !$scope.edit;
     };
 
-    // // modal stuff
-    // $ionicModal.fromTemplateUrl('templates/modal-edit.html', {
-    //     scope: $scope,
-    //     animation: 'slide-in-up'
-    // }).then(function(modal) {
-    //     console.log('modal created');
-    //     $scope.modal = modal;
-    // });
+    // modal stuff
+    $ionicModal.fromTemplateUrl('templates/modal-edit.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        console.log('modal created');
+        $scope.modal = modal;
+    });
 
-    // $scope.openEdit = function () {
-    //     console.log($scope);
-    //     $scope.modal.show();
-    // };
+    $scope.openEdit = function () {
+        console.log($scope);
+        $scope.modal.show();
+    };
 
-    // $scope.closeEdit = function () {
-    //     $scope.modal.hide();
-    // };
+    $scope.closeEdit = function () {
+        $scope.modal.hide();
+    };
 
-    // // clean up the modal once done
-    // $scope.$on('$destroy', function () {
-    //     $scope.modal.remove();
-    // });
+    // clean up the modal once done
+    $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+    });
 
-    // $scope.$on('modal.hidden', function () {
-    //     console.log('modal hidden');
-    //     // execute actoin
-    // });
+    $scope.$on('modal.hidden', function () {
+        console.log('modal hidden');
+        // execute actoin
+    });
 
-    // $scope.$on('modal.removed', function () {
-    //     console.log('modal removed');
-    //     // execute action
-    // });
+    $scope.$on('modal.removed', function () {
+        console.log('modal removed');
+        // execute action
+    });
 });

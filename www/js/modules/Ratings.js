@@ -20,7 +20,8 @@ angular.module('Ratings', []).service('Ratings', function ($cordovaSQLite, $root
       for (var i = 0; i < res.rows.length; i++ ) {
         items.push(res.rows.item(i));
       }
-      $rootScope.ratings = items;
+      // deep copy
+      angular.copy(items, $rootScope.ratings);
     }, function (err) {
       console.error(err);
     });
@@ -59,7 +60,7 @@ angular.module('Ratings', []).service('Ratings', function ($cordovaSQLite, $root
         for (var i = 0; i < res.rows.length; i++ ) {
           items.push(res.rows.item(i));
         }
-        $rootScope.ratings = items;
+        angular.copy(items, $rootScope.ratings);
         console.log($rootScope.ratings);
         return items;
       }, function (err) {
