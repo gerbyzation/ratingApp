@@ -1,21 +1,24 @@
-app.controller('CameraCtrl', function ($scope, $cordovaCamera, Ratings) {
+angular.module('Camera', []).factory('Camera', function ($cordovaCamera, $rootScope) {
+  var Camera = {};
 
+  Camera.getPicture = function () {
 
-  $scope.getPicture = function () {
+    console.log(Camera);
     var options = {
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
       saveToPhotoAlbum: true
     };
-
+    
     $cordovaCamera.getPicture(options).then(function (imageURI) {
-      console.log("succes callback");
-      $scope.imgURL = imageURI;
+      // $scope.imgURL = imageURI;
+      return imageURI;
     }, function (err ) {
       console.error(err);
+      return false;
     });
   };
 
-  $scope.add = Ratings.insert;
+  return Camera;
 });

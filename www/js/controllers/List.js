@@ -4,7 +4,7 @@ app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
 
 });
 
-app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, Ratings) {
+app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, Ratings, Camera) {
 
     $scope.ratings = $rootScope.ratings;
     $scope.item = {};
@@ -18,42 +18,19 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $io
 
     $scope.edit = false;
 
-    $scope.switchEditMode = function () {
-        // $scope.ratings[2].name = "Sjaak";
-        // console.log($scope.ratings[2].name);
-        $scope.edit = !$scope.edit;
+    $scope.enableEdit = function () {
+        $scope.edit = true;
+        console.log($scope.edit);
     };
 
-    // modal stuff
-    $ionicModal.fromTemplateUrl('templates/modal-edit.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function(modal) {
-        console.log('modal created');
-        $scope.modal = modal;
-    });
-
-    $scope.openEdit = function () {
-        console.log($scope);
-        $scope.modal.show();
+    $scope.disableEdit = function () {
+        Ratings.update($scope.item.name, $scope.item.URI, $scope.item.loc, $scope.item.criteria, $scope.item.rating, $scope.item.ID);
+        $scope.ratings[$scope.item.ID -1] = $scope.item;
+        $scope.edit = false;
     };
 
-    $scope.closeEdit = function () {
-        $scope.modal.hide();
+    $scope.getPicture = function () {
+        $scope.item.URI = Camera.getPicture();
     };
 
-    // clean up the modal once done
-    $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-    });
-
-    $scope.$on('modal.hidden', function () {
-        console.log('modal hidden');
-        // execute actoin
-    });
-
-    $scope.$on('modal.removed', function () {
-        console.log('modal removed');
-        // execute action
-    });
 });

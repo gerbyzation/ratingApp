@@ -1,24 +1,32 @@
 <ion-view view-title="{{item.name}}">
   <ion-content class="padding">
-    <button class="button button-outline button-positive" ng-click="switchEditMode()">Edit</button>
-    <button class="button button-outline button-positive" ng-click="openEdit();">Edit</button>
+    
+    <img ng-src="{{ item.URI }}" width="200" height="200">
+    <button class="button button-positive" ng-click="getPicture()" ng-disables="!edit">
+      <i class="icon ion-camera"></i>Get a new picture
+    </button>
 
+    <button class="button button-outline button-positive" ng-hide="edit" ng-click="enableEdit()">Edit</button>
+    <button class="button button-outline button-positive" ng-show="edit" ng-click="disableEdit();">Done</button>
 
     <div class="list">
       <label class="item item-input">
         <span class="input-label">Name</span>
-        <input type="text" ng-model="item.name">
+        <input type="text" ng-model="item.name" ng-readonly="!edit">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Location</span>
+        <input type="text" ng-model="item.loc" ng-readonly="!edit">
       </label>
       <label class="item item-input">
         <span class="input-label">Criteria</span>
-        <input type="text" ng-model="item.criteria">
+        <input type="text" ng-model="item.criteria" ng-readonly="!edit">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Rating</span>
+        <input type="text" ng-model="item.rating" ng-readonly="!edit">
       </label>
     </div>
 
-    <p>{{ item.name }}</p>
-    <p>{{ item.ID }}</p>
-    <p>{{ item.URI }}</p>
-    <p>{{ item.loc }}</p>
-    <p>{{ item.criteria }}</p>
   </ion-content>
 </ion-view>
