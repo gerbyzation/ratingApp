@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-var app = angular.module('app', ['ionic', 'ngCordova', 'Chats', 'Friends', 'Ratings', 'Camera']);
+var app = angular.module('app', ['ionic', 'ngCordova', 'Chats', 'Friends', 'Ratings']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

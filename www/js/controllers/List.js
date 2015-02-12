@@ -4,7 +4,7 @@ app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
 
 });
 
-app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, Ratings, Camera) {
+app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $cordovaCamera, $ionicModal, Ratings) {
 
     $scope.ratings = $rootScope.ratings;
     $scope.item = {};
@@ -29,8 +29,23 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $io
         $scope.edit = false;
     };
 
-    $scope.getPicture = function () {
-        $scope.item.URI = Camera.getPicture();
+    var options = {
+      quality: 100,
+      destinationType: navigator.camera.DestinationType.FILE_URI,
+      sourceType: navigator.camera.PictureSourceType.CAMERA,
+      saveToPhotoAlbum: true
     };
+
+    $scope.getPicture = function () {
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        // $scope.imgURL = imageURI;
+        $scope.item.URI = imageURI;
+      }, function (err ) {
+        console.error(err);
+        return false;
+      });
+
+    };
+
 
 });

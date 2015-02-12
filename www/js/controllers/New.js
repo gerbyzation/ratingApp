@@ -1,9 +1,23 @@
-app.controller('NewCtrl', function ($scope, Camera, Ratings) {
+app.controller('NewCtrl', function ($scope, $cordovaCamera, Ratings) {
 
-  $scope.getPicture = Camera.getPicture;
+  var options = {
+    quality: 100,
+    destinationType: navigator.camera.DestinationType.FILE_URI,
+    sourceType: navigator.camera.PictureSourceType.CAMERA,
+    saveToPhotoAlbum: true
+  };
 
-  $scope.showCamera = function () {
-    console.log($scope.getPicture);
+  $scope.imgURl = "";
+
+  $scope.getPicture = function () {
+    $cordovaCamera.getPicture(options).then(function (imageURI) {
+      // $scope.imgURL = imageURI;
+      $scope.imgURL = imageURI;
+    }, function (err ) {
+      console.error(err);
+      return false;
+    });
+
   };
 
   $scope.add = Ratings.insert;
