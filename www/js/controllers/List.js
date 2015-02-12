@@ -1,6 +1,13 @@
 app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
     
-    $scope.selectAll = Ratings.selectAll();
+    document.addEventListener("deviceready", function () {    
+      $scope.selectAll = Ratings.selectAll();
+    }, false);
+
+    $scope.doRefresh = function () {
+      Ratings.selectAll();
+      $scope.$broadcast('scroll.refreshComplete');
+    };
 
 });
 
@@ -8,6 +15,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $co
 
     $scope.ratings = $rootScope.ratings;
     $scope.item = {};
+
     $scope.select = function () {
 
         // SQL ID is not zero-based, subtract 1 from ID to get index
@@ -24,7 +32,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $co
     };
 
     $scope.disableEdit = function () {
-        Ratings.update($scope.item.name, $scope.item.URI, $scope.item.loc, $scope.item.criteria, $scope.item.rating, $scope.item.ID);
+        Ratings.update($scope.item.name, $scope.item.desc, $scope.item.URI, $scope.item.loc, $scope.item.rating, $scope.item.ID);
         $scope.ratings[$scope.item.ID -1] = $scope.item;
         $scope.edit = false;
     };
@@ -33,7 +41,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $co
       quality: 100,
       destinationType: navigator.camera.DestinationType.FILE_URI,
       sourceType: navigator.camera.PictureSourceType.CAMERA,
-      saveToPhotoAlbum: true
+      saveToPhotoAlbum: true,
     };
 
     $scope.getPicture = function () {
@@ -46,6 +54,5 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $co
       });
 
     };
-
 
 });

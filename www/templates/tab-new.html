@@ -1,7 +1,5 @@
 <ion-view view-title="New">
   <ion-content>
-  
-    <h1>Add New Rating</h1>
 
     <img ng-src="{{ imgURL }}" width="200" height="200">
     <button class="button button-positive" ng-click="getPicture()">
@@ -20,8 +18,8 @@
         </label>
 
         <label class="item item-input item-stacked-label">
-            <span class="input-label">Criteria</span>
-            <input type="text" placeholder="stuff" ng-model="criteria">
+            <span class="input-label">desc</span>
+            <input type="text" placeholder="stuff" ng-model="desc">
         </label>
 
         <label class="item item-input item-stacked-label">
@@ -29,7 +27,7 @@
             <input type="number" placeholder="5" ng-model="rating">
         </label>
 
-        <button class="button button-balanced" ng-click="add(name, imgURL, loc, criteria, rating)">Add Rating</button>
+        <button class="button button-balanced" ng-click="add(name, desc, imgURL, loc,  rating)">Add Rating</button>
     </div>
 
   </ion-content>

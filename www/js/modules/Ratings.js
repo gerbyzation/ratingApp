@@ -1,4 +1,4 @@
-angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $rootScope) {
+angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $rootScope, $cordovaSplashscreen) {
 
   var Ratings = {};
 
@@ -7,9 +7,11 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
 
   // open (and if necessary initialize db)
   document.addEventListener("deviceready", function () {
+    $cordovaSplashscreen.hide();
+    console.log('device is ready');
     db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
 
-    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, name text, URI text, loc text, criteria text, rating integer);";
+    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, name text, desc text, URI text, loc text, rating integer);";
     $cordovaSQLite.execute(db, query, []).then(function (res) {
       // do nothing
     }, function (err) {
@@ -30,10 +32,10 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
   }, false);
 
   // return {
-  Ratings.insert =  function (name, URI, loc, criteria, rating) {
+  Ratings.insert =  function (name, desc, URI, loc, rating) {
 
-    var query = "INSERT INTO ratings (name, URI, loc, criteria, rating) VALUES (?, ?, ?, ?, ?);";
-    $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating]).then(function (res) {
+    var query = "INSERT INTO ratings (name, desc, URI, loc, rating) VALUES (?, ?, ?, ?, ?);";
+    $cordovaSQLite.execute(db, query, [name, desc, URI, loc, rating]).then(function (res) {
       var items = [];
       for (var i = 0; i < res.rows.length; i++ ) {
         items.push(res.rows.item(i));
@@ -44,10 +46,10 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     });
   };
 
-  Ratings.update = function (name, URI, loc, criteria, rating, ID) {
+  Ratings.update = function (name, desc, URI, loc, rating, ID) {
     console.log(arguments);
-    var query = "UPDATE ratings SET name=?, URI=?, loc=?, criteria=?, rating=? WHERE ID=?";
-    $cordovaSQLite.execute(db, query, [name, URI, loc, criteria, rating, ID]).then( function (res) {
+    var query = "UPDATE ratings SET name=?, desc=?, URI=?, loc=?, rating=? WHERE ID=?";
+    $cordovaSQLite.execute(db, query, [name, desc, URI, loc, rating, ID]).then( function (res) {
       console.log(res);
     }, function (err) {
       console.error(err);
@@ -83,7 +85,7 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
   Ratings.dropTable = function () {
     var query = "DROP TABLE ratings;";
 
-    $cordovaSQLite.execute(db, query, []).then(function () {
+    $cordovaSQLite.execute(db, query, []).then(function (res) {
       console.log(res);
     }, function (err) {
       console.error(err);

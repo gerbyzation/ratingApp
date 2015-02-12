@@ -1,12 +1,13 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-var app = angular.module('app', ['ionic', 'ngCordova', 'Chats', 'Friends', 'Ratings']);
+var app = angular.module('app', ['ionic', 'ngCordova', 'Ratings']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -14,6 +15,7 @@ app.run(function($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 });
 
@@ -63,44 +65,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         }
       })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
-
   .state('tab.account', {
     url: '/account',
     views: {
@@ -112,7 +76,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/friends');
+  $urlRouterProvider.otherwise('/tab/list');
 
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.tabs.position('bottom');

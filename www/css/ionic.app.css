@@ -4692,9 +4692,8 @@ a.item-content {
     position: absolute;
     top: 10px;
     left: 10px;
-    max-width: 80px;
-    max-height: 80px;
-    width: 100%; }
+    width: 80px;
+    height: 80px; }
 
 .item-avatar.item-complex, .item-avatar-left.item-complex, .item-thumbnail-left.item-complex {
   padding-top: 0;
@@ -4708,9 +4707,8 @@ a.item-content {
     position: absolute;
     top: 10px;
     right: 10px;
-    max-width: 80px;
-    max-height: 80px;
-    width: 100%; }
+    width: 80px;
+    height: 80px; }
 
 .item-avatar-right.item-complex, .item-thumbnail-right.item-complex {
   padding-top: 0;
@@ -7014,3 +7012,7 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+img.item-view {
+  width: 100%;
+  height: 200px; }

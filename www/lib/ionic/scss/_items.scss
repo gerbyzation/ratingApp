@@ -510,9 +510,8 @@ button.item.item-button-right {
     position: absolute;
     top: $item-thumbnail-margin;
     left: $item-thumbnail-margin;
-    max-width: $item-thumbnail-width;
-    max-height: $item-thumbnail-height;
-    width: 100%;
+    width: $item-thumbnail-width;
+    height: $item-thumbnail-height;
   }
 }
 .item-avatar.item-complex,
@@ -533,9 +532,8 @@ button.item.item-button-right {
     position: absolute;
     top: $item-thumbnail-margin;
     right: $item-thumbnail-margin;
-    max-width: $item-thumbnail-width;
-    max-height: $item-thumbnail-height;
-    width: 100%;
+    width: $item-thumbnail-width;
+    height: $item-thumbnail-height;
   }
 }
 .item-avatar-right.item-complex,

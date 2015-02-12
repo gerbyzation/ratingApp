@@ -1,7 +1,7 @@
 <ion-modal-view>
     <ion-header-bar>
         <h1 class="title">Edit Item</h1>
-        <button class="button button-positive button-outline" ng-click="closeEdit(name, URI, loc, criteria, rating, ID)">Done</button>
+        <button class="button button-positive button-outline" ng-click="closeEdit(name, desc, URI, loc, rating, ID)">Done</button>
     </ion-header-bar>
     <ion-content>
         <img ng-src="{{ item.URI }}" width="200" height="200">
@@ -18,14 +18,15 @@
             </label>
 
             <label class="item item-input item-stacked-label">
+                <span class="input-label">Description</span>
+                <input type="text" placeholder="stuff" ng-model="item.desc">
+            </label>
+
+            <label class="item item-input item-stacked-label">
                 <span class="input-label">Location</span>
                 <input type="text" placeholder="50.3740482,-4.126179" ng-model="item.loc">
             </label>
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Criteria</span>
-                <input type="text" placeholder="stuff" ng-model="item.criteria">
-            </label>
 
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Rating</span>
