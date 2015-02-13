@@ -1,38 +1,34 @@
 <ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">Edit Item</h1>
-        <button class="button button-positive button-outline" ng-click="closeEdit(name, desc, URI, loc, rating, ID)">Done</button>
-    </ion-header-bar>
-    <ion-content>
-        <img ng-src="{{ item.URI }}" width="200" height="200">
-        <button class="button button-positive" ng-click="getPicture()">
-          <i class="icon ion-camera"></i>Get a new picture
-        </button>
-        <p>{{ item.URI }}</p>
-        <p>ID: {{ item.ID }}</p>
+  <ion-header-bar>
+    <h1 class="title">Edit Item</h1>
+    <button class="button button-positive button-outline" ng-click="closeEdit(name, desc, URI, loc, rating, ID)">Done</button>
+  </ion-header-bar>
+  <ion-content>
+    <img ng-src="{{ item.URI || 'img/camera.png' }}" class="item-view" ng-click="getPicture()" ng-disabled="!edit">
 
-        <div class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Name</span>
-                <input type="text" placeholder="Naam" ng-model="item.name">
-            </label>
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Name</span>
+        <input type="text" placeholder="Naam" ng-model="item.name">
+      </label>
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Description</span>
-                <input type="text" placeholder="stuff" ng-model="item.desc">
-            </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Description</span>
+        <input type="text" placeholder="stuff" ng-model="item.desc">
+      </label>
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Location</span>
-                <input type="text" placeholder="50.3740482,-4.126179" ng-model="item.loc">
-            </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Location</span>
+        <input type="text" placeholder="50.3740482,-4.126179" ng-model="item.loc">
+      </label>
 
 
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Rating</span>
-                <input type="number" placeholder="5" ng-model="item.rating">
-            </label>
-        </div>
+      <label class="item item-input item-stacked-label">
+        <i class="icon ion-ios7-sunny-outline"></i>
+        <input type="range" name="volume" min="0" max="100" ng-model="rating">
+        <i class="icon ion-ios7-sunny"></i>
+      </label>
+    </div>
 
-    </ion-content>
+  </ion-content>
 </ion-modal-view>
