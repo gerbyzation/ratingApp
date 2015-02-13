@@ -35,6 +35,22 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation,
     enableHighAccuracy: true,
   };
 
+  var mapOptions = {
+    zoom: 15
+  };
+
+  var markerOptions = {
+    map: map,
+    title: "Current location"
+  };
+
+  $scope.initMap = function () {
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    var marker = new google.maps.Marker(markerOptions);
+    marker.setMap(map);
+  };
+
   $scope.getLoc = function () {
     console.log("Get the position");
     $cordovaGeolocation.getCurrentPosition(geoOptions).then(function (position) {
@@ -42,6 +58,10 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation,
         'lat': position.coords.latitude,
         'lng': position.coords.longitude
       };
+
+      mapOptions.center = $scope.pos;
+      markerOptions.position = $scope.pos;
+      $scope.initMap();
 
       $scope.loc = position.coords.latitude + ',' + position.coords.longitude;
       
@@ -55,3 +75,6 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation,
   }();
   
 });
+
+// google.maps.event.addDomListener(window, 'load', initialize);
+

@@ -1,12 +1,12 @@
 app.controller('AccountCtrl', function($scope,$rootScope, Ratings) {
 
-  $scope.settings = {
-    enableFriends: true
-  };
-
+  // clear table
   $scope.nukeDB = Ratings.nukeAll;
+
+  // destroy table
   $scope.dropTable = Ratings.dropTable;
 
+  // add some random data to database
   $scope.addTestData = function () {
 
     for (var i = 0; i < 10; i++) {

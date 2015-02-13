@@ -6,8 +6,7 @@
   </ion-header-bar>
 
   <ion-content>
-      <img ng-src="{{ item.URI || 'img/camera.png' }}" class="item-view" ng-click="getPicture()">
-
+    <img ng-src="{{ item.URI || 'img/camera.png' }}" class="item-view" ng-click="getPicture()">
 
     <div class="list">
       <label class="item item-input item-stacked-label">
@@ -25,7 +24,6 @@
         <input type="text" placeholder="50.3740482,-4.126179" ng-model="item.loc">
       </label>
 
-
       <label class="item item-stacked-label">
         <label><strong>Rating</strong></label>
         <p>{{ item.rating }}</p>
@@ -38,7 +36,6 @@
       </label>
 
     </div>
-    <p>{{ item.ID}}</p>
 
   </ion-content>
 </ion-modal-view>
