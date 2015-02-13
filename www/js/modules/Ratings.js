@@ -3,26 +3,18 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
   var Ratings = {};
 
   $rootScope.ratings = [];
+  $rootScope.ordered = [];
   var db;
 
-  // open (and if necessary initialize db)
+  // Initialise app
   document.addEventListener("deviceready", function () {
+    // hide splashscreen
     $cordovaSplashscreen.hide();
     console.log('device is ready');
+    // initialise/open database
     Ratings.init();
+    // pull data from database
     Ratings.selectAll();
-
-    // $cordovaSQLite.execute(db, 'SELECT * FROM ratings;', []).then(function (res) {
-    //   console.log(res.rows.length);
-    //   var items = [];
-    //   for (var i = 0; i < res.rows.length; i++ ) {
-    //     items.push(res.rows.item(i));
-    //   }
-    //   // deep copy
-    //   angular.copy(items, $rootScope.ratings);
-    // }, function (err) {
-    //   console.error(err);
-    // });
   }, false);
 
   // initialise database
@@ -80,8 +72,9 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     });
   };
 
+  // get all results ordered by rating
   Ratings.selectOrdered = function () {
-    var query = "SELECT * FROM ratings;";
+    var query = "SELECT * FROM ratings ORDER BY rating DESC;";
     $cordovaSQLite.execute(db, query, []).then(function (res) { 
 
       var items = [];
@@ -89,7 +82,7 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
         items.push(res.rows.item(i));
       }
       // deep copy
-      angular.copy(items, $rootScope.ratings);
+      angular.copy(items, $rootScope.ordered);
     }, function (err) {
       console.error(err);
     });

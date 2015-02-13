@@ -65,6 +65,16 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         }
       })
 
+  .state('tab.rank', {
+    url: '/rank',
+    views: {
+      'tab-rank': {
+        templateUrl: 'templates/tab-rank.html',
+        controller: 'RankCtrl'
+      }
+    }
+  })
+
   .state('tab.account', {
     url: '/account',
     views: {
