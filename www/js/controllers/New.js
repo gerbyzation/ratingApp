@@ -1,4 +1,4 @@
-app.controller('NewCtrl', function ($scope, $cordovaCamera, Ratings) {
+app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation, $state, Ratings) {
 
   var cameraOptions = {
     quality: 100,
@@ -20,8 +20,10 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, Ratings) {
 
   };
 
-  $scope.add = Ratings.insert;
-
+  $scope.add = function (name, desc, imgURL, loc, rating) {
+    Ratings.insert(name, desc, imgURL, loc, rating);
+    $state.go('tab.list');
+  };
 
   var geoOptions = {
     timeout: 10000,
@@ -35,11 +37,16 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, Ratings) {
         'lat': position.coords.latitude,
         'lng': position.coords.longitude
       };
+
+      $scope.loc = position.coords.latitude + ',' + position.coords.longitude;
       
       console.log("Position: " + position.coords.latitude + " " + position.coords.longitude);
     }, function (err) {
+      if (err.code == 3) {
+        alert('Where are we? I can\'t find where we are', 'Oops!', 'OK');
+      }
       console.error(err);
     });
-  };
+  }();
   
 });

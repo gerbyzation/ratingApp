@@ -13,6 +13,8 @@ app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
 
 app.controller('ListDetailCtrl', function ($scope, $rootScope, $stateParams, $cordovaCamera, $ionicModal, Ratings) {
 
+    $scope.numLimit = '-1';
+
     $scope.ratings = $rootScope.ratings;
     $scope.item = {};
 

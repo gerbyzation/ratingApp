@@ -1,5 +1,8 @@
 {
   "name": "ratingApp",
-  "app_id": ""
-  "gulpStartupTasks": ["sass", "watch"]
+  "app_id": "03b87803",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ]
 }

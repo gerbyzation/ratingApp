@@ -10,7 +10,7 @@ app.controller('AccountCtrl', function($scope,$rootScope, Ratings) {
   $scope.addTestData = function () {
 
     for (var i = 0; i < 10; i++) {
-      Ratings.insert('test ' + i, 'cool', "file"+i, "home", Math.ceil(Math.random() * 10));
+      Ratings.insert('test ' + i, 'cool', undefined, "home", Math.ceil(Math.random() * 10));
     }
 
   };

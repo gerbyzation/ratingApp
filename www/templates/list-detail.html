@@ -1,13 +1,11 @@
 <ion-view view-title="{{item.name}}">
   <ion-content>
     
-    <img ng-src="{{ item.URI }}" class="item-view">
-    <button class="button button-positive" ng-click="getPicture()" ng-disabled="!edit">
+    <img ng-src="{{ item.URI || 'img/camera.png' }}" class="item-view" ng-click="getPicture()" ng-disabled="!edit">
+<!--     <button class="button button-positive" ng-click="getPicture()" ng-disabled="!edit">
       <i class="icon ion-camera"></i>Get a new picture
-    </button>
+    </button> -->
 
-    <button class="button button-outline button-positive" ng-hide="edit" ng-click="enableEdit()">Edit</button>
-    <button class="button button-outline button-positive" ng-show="edit" ng-click="disableEdit();">Done</button>
 
     <div class="list">
       <label class="item item-input">
@@ -22,11 +20,14 @@
         <span class="input-label">Location</span>
         <input type="text" ng-model="item.loc" ng-readonly="!edit">
       </label>
-      <label class="item item-input">
-        <span class="input-label">Rating</span>
-        <input type="text" ng-model="item.rating" ng-readonly="!edit">
+      <label class="item range range-positive">
+        <i class="icon ion-ios7-sunny-outline"></i>
+        <input type="range" name="volume" min="0" max="100" ng-disabled="!edit" ng-model="item.rating">
+        <i class="icon ion-ios7-sunny"></i>
       </label>
     </div>
+
+    <button class="button button-block button-outline button-positive" ng-hide="edit" ng-click="enableEdit()">Edit</button>
 
   </ion-content>
 </ion-view>
