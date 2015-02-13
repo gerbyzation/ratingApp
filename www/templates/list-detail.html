@@ -1,33 +1,29 @@
 <ion-view view-title="{{item.name}}">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ng-click="openEdit()">Edit</button>
+  </ion-nav-buttons>
+
   <ion-content>
     
     <img ng-src="{{ item.URI || 'img/camera.png' }}" class="item-view" ng-click="getPicture()" ng-disabled="!edit">
-<!--     <button class="button button-positive" ng-click="getPicture()" ng-disabled="!edit">
-      <i class="icon ion-camera"></i>Get a new picture
-    </button> -->
 
+    <ion-list>
+      <ion-item class="item-stacked-label">
+        <label><strong>Name</strong></label>
+        <p>{{ item.name }}</p>
+      </ion-item>
 
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Name</span>
-        <input type="text" ng-model="item.name" ng-readonly="!edit">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Description</span>
-        <input type="text" ng-model="item.desc" ng-readonly="!edit">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Location</span>
-        <input type="text" ng-model="item.loc" ng-readonly="!edit">
-      </label>
-      <label class="item range range-positive">
-        <i class="icon ion-ios7-sunny-outline"></i>
-        <input type="range" name="volume" min="0" max="100" ng-disabled="!edit" ng-model="item.rating">
-        <i class="icon ion-ios7-sunny"></i>
-      </label>
-    </div>
+      <ion-item class="item-stacked-label">
+        <label><strong>Description</strong></label>
+        <p>{{ item.desc }}</p>
+      </ion-item>
 
-    <button class="button button-block button-outline button-positive" ng-hide="edit" ng-click="enableEdit()">Edit</button>
+      <ion-item class="item-stacked-label">
+        <label class="input-label"><strong>Rating</strong></label>
+        <p>{{item.rating}}</p>
+      </ion-item>
 
+    </ion-list>
+    
   </ion-content>
 </ion-view>

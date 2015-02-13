@@ -4,19 +4,12 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
 
   $rootScope.ratings = [];
   var db;
-
+  Ratings.db = db;
   // open (and if necessary initialize db)
   document.addEventListener("deviceready", function () {
     $cordovaSplashscreen.hide();
     console.log('device is ready');
-    db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
-
-    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, name text, desc text, URI text, loc text, rating integer);";
-    $cordovaSQLite.execute(db, query, []).then(function (res) {
-      // do nothing
-    }, function (err) {
-      console.error(err);
-    });
+    Ratings.init();
 
     $cordovaSQLite.execute(db, 'SELECT * FROM ratings;', []).then(function (res) {
       console.log(res.rows.length);
@@ -31,7 +24,18 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     });
   }, false);
 
-  // return {
+  Ratings.init = function () {
+    db = window.openDatabase('rating', '1.0', 'Rating DB', 100000000);
+
+    var query = "CREATE TABLE IF NOT EXISTS ratings (ID integer unique primary key, name text, desc text, URI text, loc text, rating integer);";
+    $cordovaSQLite.execute(db, query, []).then(function (res) {
+      // do nothing
+    }, function (err) {
+      console.error(err);
+    });
+
+  };
+
   Ratings.insert =  function (name, desc, URI, loc, rating) {
 
     var query = "INSERT INTO ratings (name, desc, URI, loc, rating) VALUES (?, ?, ?, ?, ?);";
@@ -71,6 +75,33 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     });
   };
 
+  Ratings.delete = function (id) {
+    console.log(id);
+    var query = "DELETE FROM ratings WHERE ID=?;";
+
+
+    $cordovaSQLite.execute(db, query, [id]).then(function (res) {
+      console.log("delete", res);
+    }, function (err) {
+      console.error(err);
+    });
+  };
+
+  Ratings.select = function (id) {
+    console.log("select id", id);
+    var query = "SELECT * FROM ratings WHERE ID='" + id + "';";
+    console.log("select query", query);
+
+    $cordovaSQLite.execute(db, query, []).then(function (res) {
+      console.log("select result", res.rows.item(0));
+      angular.copy(res.rows.item(0), $rootScope.item);
+      // $rootScope.item = res.rows.item(0);
+      // return res.rows.item(0);
+    }, function (err) {
+      console.error("select error", err);
+    });
+  };
+
   Ratings.nukeAll = function () {
     var query = "DELETE FROM ratings;";
 
@@ -78,7 +109,7 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
       console.log("Deleted all DB entries");
       console.log(res);
     }, function (err) {
-      console.error(err);
+      console.error("delete error", err);
     });
   };
 

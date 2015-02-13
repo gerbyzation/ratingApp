@@ -20,6 +20,11 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation,
 
   };
 
+  $scope.addTop = function () {
+    Ratings.insert($scope.name, $scope.desc, $scope.imgURL, $scope.loc, $scope.rating);
+    $state.go('tab.list');
+  };
+
   $scope.add = function (name, desc, imgURL, loc, rating) {
     Ratings.insert(name, desc, imgURL, loc, rating);
     $state.go('tab.list');
@@ -27,7 +32,7 @@ app.controller('NewCtrl', function ($scope, $cordovaCamera, $cordovaGeolocation,
 
   var geoOptions = {
     timeout: 10000,
-    enableHighAccuracy: false,
+    enableHighAccuracy: true,
   };
 
   $scope.getLoc = function () {
