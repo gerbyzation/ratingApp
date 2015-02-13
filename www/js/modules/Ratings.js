@@ -10,7 +10,7 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
     $cordovaSplashscreen.hide();
     console.log('device is ready');
     Ratings.init();
-    Rating.selectAll();
+    Ratings.selectAll();
 
     // $cordovaSQLite.execute(db, 'SELECT * FROM ratings;', []).then(function (res) {
     //   console.log(res.rows.length);
@@ -66,6 +66,21 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
 
   // select all items from database
   Ratings.selectAll = function () {
+    var query = "SELECT * FROM ratings;";
+    $cordovaSQLite.execute(db, query, []).then(function (res) { 
+
+      var items = [];
+      for (var i = 0; i < res.rows.length; i++ ) {
+        items.push(res.rows.item(i));
+      }
+      // deep copy
+      angular.copy(items, $rootScope.ratings);
+    }, function (err) {
+      console.error(err);
+    });
+  };
+
+  Ratings.selectOrdered = function () {
     var query = "SELECT * FROM ratings;";
     $cordovaSQLite.execute(db, query, []).then(function (res) { 
 

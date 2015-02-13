@@ -1,13 +1,8 @@
 <ion-view view-title="New">
-  <!-- <ion-nav-buttons side="secondary">
-    <button class="button button-clear" ng-click="addTop()">Add</button>
-  </ion-nav-buttons> -->
+
   <ion-content>
 
     <img ng-src="{{ imgURL || 'img/camera.png' }}" class="item-view" ng-click="getPicture()">
-    <!-- <button class="button button-positive" ng-click="getPicture()">
-      <i class="icon ion-camera"></i>Get a new picture
-    </button> -->
 
     <div class="list">
         <label class="item item-input item-stacked-label">
@@ -21,12 +16,6 @@
             <label><strong>Description</strong></label>
             <input type="text" placeholder="stuff" ng-model="desc">
         </label>
-<!-- 
-        <ion-item class="item-stacked-label">
-          <label><strong>Description</strong></label>
-          <p>{{ item.desc }}</p>
-        </ion-item>
- -->
 
         <label class="item item-stacked-label">
           <label><strong>Rating</strong></label>

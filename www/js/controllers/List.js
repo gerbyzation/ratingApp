@@ -1,6 +1,7 @@
 app.controller('ListCtrl', function ($scope, $rootScope, Ratings) {
     
-  document.addEventListener("deviceready", function () {    
+  document.addEventListener("deviceready", function () {  
+    console.log('device ready');  
     $scope.selectAll = Ratings.selectAll();
   }, false);
 
@@ -24,6 +25,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $state, $statePar
       Ratings.select($stateParams.itemId);
       console.log("item id to select", $stateParams.itemId);
       console.log("$scope.item", $rootScope.item);
+      // $scope.initMap();
   }();
 
   $scope.delete = function () {
