@@ -47,7 +47,9 @@ angular.module('Ratings', []).factory('Ratings', function ($cordovaSQLite, $root
 
   // update item in database
   Ratings.update = function (name, desc, URI, loc, rating, ID) {
+
     console.log(arguments);
+    
     var query = "UPDATE ratings SET name=?, desc=?, URI=?, loc=?, rating=? WHERE ID=?";
     $cordovaSQLite.execute(db, query, [name, desc, URI, loc, rating, ID]).then( function (res) {
       console.log(res);
